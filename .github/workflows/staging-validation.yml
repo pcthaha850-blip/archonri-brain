@@ -77,20 +77,8 @@ jobs:
             staging/results.jsonl
           retention-days: 30
 
-      - name: Check gates passed
-        run: |
-          if [ -f staging/summary.json ]; then
-            PASSED=$(jq -r '.passed' staging/summary.json)
-            if [ "$PASSED" != "true" ]; then
-              echo "❌ Staging gates failed!"
-              jq '.gates' staging/summary.json
-              exit 1
-            fi
-            echo "✅ All staging gates passed!"
-          else
-            echo "❌ summary.json not found!"
-            exit 1
-          fi
+      - name: Check promotion gates
+        run: npm run check-gates
 
   promote-to-production:
     name: Promote to Production

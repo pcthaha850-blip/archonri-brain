@@ -8,6 +8,8 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "harness": "node staging/harness.js",
+    "check-gates": "node staging/summary-parser.js",
+    "validate": "npm run harness && npm run check-gates",
     "test": "echo \"No tests configured\" && exit 0",
     "lint": "echo \"No linter configured\" && exit 0"
   },
